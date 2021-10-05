@@ -4,60 +4,28 @@
             <div class="text-white py-4 bg-gray-200">
                 <div class="text-center font-bold text-2xl text-indigo-600">
                     <h2>
-                        <i class="fab fa-gg"></i> Convert
+                        <i class="fas fa-exchange-alt"></i> Convert
                     </h2>
                 </div>
                 <form action="/convert" method="POST">
                     @csrf
-    
                     <div class="px-4 py-12 text-white">
-                        <div class="flex items-centr justify-between mb-5">
-                            <div class="flex flex-col font-bold w-2/6 px-2">
-                                <label for="amount" class="mb-3 text-black">
-                                    Amount
-                                </label>
-                                <input 
-                                    value=""
-                                    type="text"
-                                    name="amount"
-                                    placeholder="1.00"
-                                    class="py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600 border-4">
-                            </div>
-    
-                            <div class="flex flex-col font-bold w-4/6 px-2">
-                                <label for="from" class="mb-3 text-black">
-                                    From
-                                </label>
-                                <select 
-                                    class="py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600 border-4"
-                                    name="from">
-                                    @foreach ($codes as $code => $value)
-                                        <option class="py-1" {{ $code == 'MMK' ? 'selected': ''}}>
-                                            {{$code}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-    
-                            <div class="flex flex-col font-bold w-4/6 px-2">
-                                <label for="to" class="mb-3 text-black">
-                                    To
-                                </label>
-                                <select 
-                                    class="py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600 border-4"
-                                    name="to">
-                                    @foreach ($codes as $code => $value)
-                                        <option class="py-1" {{ $code == 'USD' ? 'selected': ''}}>
-                                            {{$code}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-    
-                            <div class="float-right text-right">
-                                <button type="submit" class="bg-indigo-600 border font-bold mt-6 py-4 px-5 rounded-xl transition-all hover:bg-indigo-500">
-                                    Convert
-                                </button>
+                        <div class="w-auto flex flex-col md:flex-row md:items-center md:justify-between mb-5 space-y-4">
+                            <x-form.input name="amount" />
+                            {{-- From --}}
+                            <x-form.panel>
+                                <x-form.label name="from" />
+                                <x-form.select :codes="$codes" name="from" default="USD" />
+                            </x-form.panel>
+                            
+                            {{-- To --}}
+                            <x-form.panel>
+                                <x-form.label name="to" />
+                                <x-form.select :codes="$codes" name="to" default="MMK" />
+                            </x-form.panel>
+                            {{-- submit btn --}}
+                            <div class="md:float-right text-right">
+                                <x-form.submit name="Convert" />
                             </div>
                         </div>
                     </div>
