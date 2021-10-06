@@ -27,7 +27,10 @@ class CurrencyController extends Controller
         ->get();
 
         return back()->with([
-            'conversion' => $request->amount . ' ' . $request->from . ' is equal to ' . $converted . ' ' .$request->to
+            'amount' => $request->amount,
+            'result' => $converted,
+            'from' => $request->from,
+            'to' => $request->to
         ]);
     }
 }
